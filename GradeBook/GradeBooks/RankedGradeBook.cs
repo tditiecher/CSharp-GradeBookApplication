@@ -6,14 +6,38 @@ namespace GradeBook.GradeBooks
 {
     public class RankedGradeBook : BaseGradeBook
     {
+        private const int MinimumNumberOfStudents = 5;
+
         public RankedGradeBook(string name) : base(name)
         {
             Type = GradeBookType.Ranked;
         }
 
+        public override void CalculateStatistics()
+        {
+            if (Students.Count < MinimumNumberOfStudents)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students with grades in order to properly calculate a student's overall grade.");
+                return;
+            }
+
+            base.CalculateStatistics();
+        }
+
+        public override void CalculateStudentStatistics(string name)
+        {
+            if (Students.Count < MinimumNumberOfStudents)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students with grades in order to properly calculate a student's overall grade.");
+                return;
+            }
+
+            base.CalculateStudentStatistics(name);
+        }
+
         public override char GetLetterGrade(double averageGrade)
         {
-            if (Students.Count < 5)
+            if (Students.Count < MinimumNumberOfStudents)
             {
                 throw new InvalidOperationException("Ranked-grading requires a minimum of 5 students to work");
             }
