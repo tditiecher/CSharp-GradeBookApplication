@@ -8,7 +8,7 @@ namespace GradeBook.GradeBooks
     {
         private const int MinimumNumberOfStudents = 5;
 
-        public RankedGradeBook(string name) : base(name)
+        public RankedGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
             Type = GradeBookType.Ranked;
         }
